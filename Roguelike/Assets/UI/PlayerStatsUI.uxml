@@ -1,0 +1,84 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/PlayerStatsUI.uss?fileID=7433441132597879392&amp;guid=8b98129a66cb6e440891c3e4e27d1d8f&amp;type=3#PlayerStatsUI" />
+    <ui:ScrollView class="root">
+        <ui:Label text="ESTADÍSTICAS DEL PERSONAJE" class="title" />
+        <ui:VisualElement class="name-container">
+            <ui:Label text="Nombre del personaje" class="name-label" />
+            <ui:TextField name="NombrePersonaje" class="name-field" />
+        </ui:VisualElement>
+        <ui:VisualElement class="points-container">
+            <ui:Label text="Puntos disponibles:" />
+            <ui:Label name="PuntosDisponibles" text="0" class="points-value" />
+        </ui:VisualElement>
+        <ui:VisualElement class="section">
+            <ui:Label text="ATRIBUTOS" class="section-title" />
+            <ui:VisualElement class="entry-box">
+                <ui:VisualElement class="row">
+                    <ui:Label text="Fuerza" class="attr-name" />
+                    <ui:Button name="BtnFuerzaMenos" text="-" class="btn-minus" />
+                    <ui:Label name="FuerzaValue" class="attribute-value" style="-unity-text-align: upper-center;" />
+                    <ui:Button name="BtnFuerzaMas" text="+" class="btn-plus" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement class="entry-box">
+                <ui:VisualElement class="row">
+                    <ui:Label text="Resistencia" class="attr-name" />
+                    <ui:Button name="BtnResistenciaMenos" text="-" class="btn-minus" />
+                    <ui:Label name="ResistenciaValue" class="attribute-value" />
+                    <ui:Button name="BtnResistenciaMas" text="+" class="btn-plus" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement class="entry-box">
+                <ui:VisualElement class="row">
+                    <ui:Label text="Destreza" class="attr-name" />
+                    <ui:Button name="BtnDestrezaMenos" text="-" class="btn-minus" />
+                    <ui:Label name="DestrezaValue" class="attribute-value" />
+                    <ui:Button name="BtnDestrezaMas" text="+" class="btn-plus" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement class="entry-box">
+                <ui:VisualElement class="row">
+                    <ui:Label text="Inteligencia" class="attr-name" />
+                    <ui:Button name="BtnInteligenciaMenos" text="-" class="btn-minus" />
+                    <ui:Label name="InteligenciaValue" class="attribute-value" />
+                    <ui:Button name="BtnInteligenciaMas" text="+" class="btn-plus" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement class="section">
+            <ui:Label text="ESTADÍSTICAS" class="section-title" />
+            <ui:VisualElement class="entry-box stat-box">
+                <ui:VisualElement class="row">
+                    <ui:Label text="Salud Máxima" class="stat-name" />
+                    <ui:VisualElement class="stat-badge">
+                        <ui:Label name="SaludMaxima" class="stat-value" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement class="entry-box stat-box">
+                <ui:VisualElement class="row">
+                    <ui:Label text="Daño" class="stat-name" />
+                    <ui:VisualElement class="stat-badge">
+                        <ui:Label name="Danio" class="stat-value" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement class="entry-box stat-box">
+                <ui:VisualElement class="row">
+                    <ui:Label text="Esquiva" class="stat-name" />
+                    <ui:VisualElement class="stat-badge">
+                        <ui:Label name="Esquiva" class="stat-value" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement class="entry-box stat-box">
+                <ui:VisualElement class="row">
+                    <ui:Label text="Maná" class="stat-name" />
+                    <ui:VisualElement class="stat-badge">
+                        <ui:Label name="Mana" class="stat-value" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:ScrollView>
+</ui:UXML>
