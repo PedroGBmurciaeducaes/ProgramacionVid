@@ -25,6 +25,11 @@ public class BoardManager : MonoBehaviour
 
     public ExitCellObject ExitCellPrefab;
 
+    public ChestObject[] ChestPrefab;
+    
+    public ExpObject[] EXPprefab;
+
+
 
     public List<Vector2Int> m_EmptyCellsList;
 
@@ -33,9 +38,12 @@ public class BoardManager : MonoBehaviour
     public Tile[] GroundTiles;
     public Tile[] WallTiles;
 
-    float WallDensity = 0.25f;
+    float WallDensity = 0.25f;      // Se establece el tanto por ciento de densidad de objetos en el nivel (ya dividido entre 100)
     float FoodDensity = 0.1f;
     float EnemyDensity = 0.025f;
+    float EXPDensity = 0.05f;
+    float ChestDensity = 0.02f;
+
 
     public void Init()
     {
@@ -82,6 +90,8 @@ public class BoardManager : MonoBehaviour
         GenerateWall(); // new line
         GenerateFood();
         GenerateEnemy();
+        GenerateChest();
+        GenerateEXP();
     }
 
 
@@ -200,6 +210,87 @@ public class BoardManager : MonoBehaviour
 
         }
     }
+
+
+    void GenerateChest()
+    {
+
+        int ChestCount = Mathf.RoundToInt(ChestDensity * m_EmptyCellsList.Count);
+        int pesoCount = 0;
+
+        foreach (ChestObject e in ChestPrefab)
+        {
+            pesoCount += e.peso;
+        }
+
+
+        for (int i = 0; i < ChestCount; ++i)
+        {
+            int randomIndex = UnityEngine.Random.Range(0, m_EmptyCellsList.Count);
+            Vector2Int coord = m_EmptyCellsList[randomIndex];
+
+            m_EmptyCellsList.RemoveAt(randomIndex);
+            int chestRand = UnityEngine.Random.Range(0, pesoCount);
+
+
+            ChestObject newChest;
+
+            int pesoAcumulado = 0;
+
+            foreach (ChestObject e in ChestPrefab)
+            {
+                if (chestRand < pesoAcumulado + e.peso)
+                {
+                    newChest = Instantiate(e);
+                    AddObject(newChest, coord);
+                    break;
+                }
+                pesoAcumulado += e.peso;
+            }
+
+        }
+    }
+
+    void GenerateEXP()
+    {
+        int EXPCount = Mathf.RoundToInt(EXPDensity * m_EmptyCellsList.Count);
+        int pesoCount = 0;
+
+        foreach (WallObject e in WallPrefab)
+        {
+            pesoCount += e.peso;
+        }
+
+        for (int i = 0; i < EXPCount; i++)
+        {
+            int randomIndex = UnityEngine.Random.Range(0, m_EmptyCellsList.Count);
+
+            int expRand = UnityEngine.Random.Range(0, pesoCount);
+
+            int pesoAcumulado = 0;
+
+            Vector2Int coord = m_EmptyCellsList[randomIndex];
+
+            m_EmptyCellsList.RemoveAt(randomIndex);                                     //No utiliz objetos como tal, estamos utilizando directamente valores.
+
+            ExpObject NewObjetoEXP;
+
+
+            foreach (ExpObject e in EXPprefab)
+            {
+                if (expRand < pesoAcumulado + e.peso)
+                {
+                    NewObjetoEXP = Instantiate(e);
+                    AddObject(NewObjetoEXP, coord);
+                    break;
+                }
+                pesoAcumulado += e.peso;
+            }
+
+        }
+    }
+
+
 
 
     public void SetCellTile(Vector2Int cellIndex, Tile tile)

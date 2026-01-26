@@ -187,9 +187,15 @@ MonoBehaviour:
   - {fileID: 1836965239144534283, guid: 306cde10d2d86d64ba56d01ee5a67323, type: 3}
   - {fileID: 1836965239144534283, guid: 8da2813d55498cc448d650d9541498f7, type: 3}
   ExitCellPrefab: {fileID: 626523643920220533, guid: 8e518de5f5254fd4e859300126e545bf, type: 3}
+  ChestPrefab:
+  - {fileID: 3932192521640621002, guid: 6e273fc8d48ef564b8344cd62bed0577, type: 3}
+  EXPprefab:
+  - {fileID: 4454166801840968219, guid: 6526bcfcfb04c784984ae1ba5f1dc4fb, type: 3}
+  - {fileID: 4454166801840968219, guid: 541c903283fb66f48b238c0c97617bc3, type: 3}
+  - {fileID: 4454166801840968219, guid: 59b781d027a666144937a227f3f00a73, type: 3}
   m_EmptyCellsList: []
-  Width: 15
-  Height: 15
+  Width: 10
+  Height: 10
   GroundTiles:
   - {fileID: 11400000, guid: 66e7339ec9a80134fa8aeee85f904260, type: 2}
   - {fileID: 11400000, guid: a87938f1370d73646a82c8761980546e, type: 2}
@@ -261,7 +267,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 9
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

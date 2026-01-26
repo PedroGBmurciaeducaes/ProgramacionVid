@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
 
     private int m_FoodAmount = 100;
 
+    private int m_ExpAmount = 0;
+
 
     private VisualElement m_GameOverPanel;
     private Label m_GameOverMessage;
@@ -100,5 +102,12 @@ public class GameManager : MonoBehaviour
             m_GameOverMessage.text = "Game Over!\n\nSurvived " + m_CurrentLevel + " days";
         }
 
+    }
+
+
+    public void ChangeExp(int amount)  //Esto debería de subir la experiencia del jugador en el script de las estadísticas del mismo
+    {                                      //Se deja por hacer
+        m_ExpAmount += amount;
+        Debug.Log("Experience Points: " + m_ExpAmount);
     }
 }
