@@ -13,6 +13,8 @@ public class ExitCellObject : CellObject
 
     public override void PlayerEntered()
     {
+        GameEvents.TriggerLevelCompleted(); // Emitir evento de nivel completado
+
         GameManager.Instance.NewLevel();
     }
 }

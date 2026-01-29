@@ -30,15 +30,26 @@ public class PlayerStats
 
     public int mana => inteligencia * 10 + resistencia / 2;
 
+
+    // Estadisticas de logros
+    public int murosDestruidos { get; set; }
+    public int enemigosDerrotados { get; set; }
+    public int nivelesCompletados { get; set; }
+
+
+
+
     public PlayerStats()
     {
-
         fuerza = 1;
         resistencia = 1;
         destreza = 1;
         inteligencia = 1;
         puntosDisponibles = 0;
         experiencia = 0;
+        murosDestruidos = 0;
+        enemigosDerrotados = 0;
+        nivelesCompletados = 0;
     }
 
     public PlayerStats(string nombre):this()

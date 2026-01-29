@@ -1,10 +1,10 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class WallObject : CellObject
+public class ChestObject : CellObject
 {
-    public Tile [] ObstacleTile;
-    public int MaxHealth = 3;
+    public Tile[] ObstacleTile;
+    public int MaxHealth = 1;
     public int peso = 100;
     private int m_HealthPoint;
     private Tile m_OriginalTile;
@@ -21,19 +21,20 @@ public class WallObject : CellObject
 
     public override bool PlayerWantsToEnter(int damage)
     {
-        m_HealthPoint -= 1;
 
         if (m_HealthPoint > 1)
         {
+            m_HealthPoint -= 1;
             return false;
         }
 
         if (m_HealthPoint == 1)
         {
+            m_HealthPoint -= 1;                                                      // Cofre abierto
             GameManager.Instance.BoardManager.SetCellTile(m_Cell, ObstacleTile[1]);
+            GameEvents.TriggerChestOpened();                                            // Emitir evento de cofre abierto
             return false;
         }
-
         GameManager.Instance.BoardManager.SetCellTile(m_Cell, m_OriginalTile);
         Destroy(gameObject);
         return true;

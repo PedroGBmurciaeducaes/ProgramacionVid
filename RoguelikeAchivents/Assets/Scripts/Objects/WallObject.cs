@@ -1,10 +1,10 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class ChestObject : CellObject
+public class WallObject : CellObject
 {
-    public Tile[] ObstacleTile;
-    public int MaxHealth = 1;
+    public Tile [] ObstacleTile;
+    public int MaxHealth = 3;
     public int peso = 100;
     private int m_HealthPoint;
     private Tile m_OriginalTile;
@@ -21,20 +21,23 @@ public class ChestObject : CellObject
 
     public override bool PlayerWantsToEnter(int damage)
     {
+        m_HealthPoint -= 1;
 
         if (m_HealthPoint > 1)
         {
-            m_HealthPoint -= 1;
             return false;
         }
 
         if (m_HealthPoint == 1)
         {
-            m_HealthPoint -= 1;
             GameManager.Instance.BoardManager.SetCellTile(m_Cell, ObstacleTile[1]);
             return false;
         }
+
         GameManager.Instance.BoardManager.SetCellTile(m_Cell, m_OriginalTile);
+
+        GameEvents.TriggerWallDestroyed();   //Emitir evento de pared destruida
+
         Destroy(gameObject);
         return true;
     }
