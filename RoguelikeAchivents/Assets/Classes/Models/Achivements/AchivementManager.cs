@@ -12,8 +12,9 @@ public class AchievementManager : MonoBehaviour
     public List<Achievement> achievements = new
     List<Achievement>();
 
+    public static event Action<Achievement> OnUnlockAchievement;
 
-        private void Start()
+    private void Start()
         {
             // Inicializamos algunos logros de prueba
             if (achievements.Count == 0)
@@ -107,7 +108,11 @@ public class AchievementManager : MonoBehaviour
             ach.IsUnlocked = true;
             Debug.Log($"<color=yellow>¡LOGRO DESBLOQUEADO:{ ach.Title}!</color>");
 
+
         // Aquí lanzarías un evento de UI para mostrar la medalla en pantalla
         // Ej: UIManager.ShowAchievementPopup(ach);
+
+        OnUnlockAchievement?.Invoke(ach);
+
     }
 }

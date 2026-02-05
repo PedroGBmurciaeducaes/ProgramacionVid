@@ -1,9 +1,10 @@
+using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
-using System.Collections;
-using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
@@ -115,8 +116,11 @@ public class GameManager : MonoBehaviour
             if (m_FoodAmount <= 0)
             {
                 PlayerController.GameOver();
+                SceneManager.LoadScene("GameOver");
+                /*
                 m_GameOverPanel.style.visibility = Visibility.Visible;
                 m_GameOverMessage.text = "Game Over!\n\nSurvived " + m_CurrentLevel + " days";
+                */
             }
         }
     }
@@ -139,8 +143,14 @@ public class GameManager : MonoBehaviour
             if (m_FoodAmount <= 0)
             {
                 PlayerController.GameOver();
+                UnityEngine.SceneManagement.SceneManager.LoadScene("GameOver");
+
+
+                /*
                 m_GameOverPanel.style.visibility = Visibility.Visible;
                 m_GameOverMessage.text = "Game Over!\n\nSurvived " + m_CurrentLevel + " days";
+                
+                 */
             }
         }
     }
