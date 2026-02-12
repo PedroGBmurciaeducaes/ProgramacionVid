@@ -2,7 +2,7 @@
 .root {
     flex-grow: 1;
     padding: 4%;
-    background-color: #cfe6ef;
+    background-color: #0c1e2b;
 }
 
 /* ===== TÍTULO ===== */
@@ -11,7 +11,7 @@
     unity-font-style: bold;
     text-align: center;
     margin-bottom: 14px;
-    color: #0d2b3e;
+    color: #e6f6ff;
 }
 
 /* ===== COLUMNAS ===== */
@@ -27,18 +27,18 @@
 /* ===== SECCIONES ===== */
 .section {
     padding: 12px;
-    background-color: #f8fcff;
+    background-color: rgba(220, 240, 255, 0.08);
     border-radius: 14px;
     border-width: 1px;
-    border-color: #9fc7da;
-    box-shadow: 0 4px 10px rgba(0, 50, 80, 0.15);
+    border-color: rgba(180, 220, 255, 0.25);
+    box-shadow: 0 6px 14px rgba(0, 20, 40, 0.6);
 }
 
 .section-title {
     font-size: 18px;
     unity-font-style: bold;
     margin-bottom: 10px;
-    color: #12384f;
+    color: #d9effa;
 }
 
 /* ===== FILAS ===== */
@@ -50,7 +50,7 @@
 
 /* ===== TEXTO ===== */
 Label {
-    color: #183e55;
+    color: #b6d9ee;
     font-size: 14px;
 }
 
@@ -61,7 +61,7 @@ Label {
 
 .name-label {
     margin-bottom: 4px;
-    color: #12384f;
+    color: #d9effa;
 }
 
 /* ===== PUNTOS ===== */
@@ -75,7 +75,7 @@ Label {
     unity-font-style: bold;
     margin-left: 6px;
     font-size: 16px;
-    color: #0d47a1;
+    color: #8fd3ff;
 }
 
 /* ===== ATRIBUTOS ===== */
@@ -91,21 +91,21 @@ Label {
     justify-content: center;
     unity-font-style: bold;
     font-size: 16px;
-    color: #1565c0;
+    color: #a8dcff;
     -unity-text-align: upper-center;
 }
 
 /* ===== ESTADÍSTICAS ===== */
 .stat-name {
     flex-grow: 2;
-    color: #12384f;
+    color: #cce9f7;
 }
 
 .stat-value {
     min-width: 40px;
     text-align: center;
     unity-font-style: bold;
-    color: #0d2b3e;
+    color: #e6f6ff;
     -unity-text-align: upper-center;
 }
 
@@ -113,15 +113,15 @@ Label {
 .entry-box {
     margin-bottom: 6px;
     padding: 8px 10px;
-    background-color: #ffffff;
+    background-color: rgba(240, 250, 255, 0.08);
     border-radius: 10px;
     border-width: 1px;
-    border-color: #b6d7e6;
-    box-shadow: 0 2px 4px rgba(0, 60, 100, 0.12);
+    border-color: rgba(180, 220, 255, 0.2);
+    box-shadow: 0 2px 6px rgba(0, 30, 60, 0.5);
 }
 
 .stat-box {
-    background-color: #f4fbff;
+    background-color: rgba(240, 250, 255, 0.05);
 }
 
 /* ===== BOTONES ===== */
@@ -130,33 +130,33 @@ Button {
     height: 28px;
     border-radius: 8px;
     unity-font-style: bold;
-    color: #0d2b3e;
+    color: #eaf7ff;
 }
 
 /* + */
 .btn-plus {
-    background-color: #64b5f6;
+    background-color: rgba(120, 180, 220, 0.2);
 }
 
 .btn-plus:hover {
-    background-color: #90caf9;
+    background-color: rgba(160, 220, 255, 0.35);
 }
 
 .btn-plus:active {
-    background-color: #42a5f5;
+    background-color: rgba(200, 240, 255, 0.45);
 }
 
 /* - */
 .btn-minus {
-    background-color: #b0bec5;
+    background-color: rgba(120, 140, 160, 0.2);
 }
 
 .btn-minus:hover {
-    background-color: #cfd8dc;
+    background-color: rgba(160, 180, 200, 0.35);
 }
 
 .btn-minus:active {
-    background-color: #90a4ae;
+    background-color: rgba(200, 220, 240, 0.45);
 }
 
 /* ===== BOTÓN FINAL ===== */
@@ -170,15 +170,19 @@ Button {
     height: 44px;
     font-size: 18px;
     unity-font-style: bold;
-    background-color: #1976d2;
-    color: white;
+
+    background-color: rgba(120, 180, 220, 0.25);
+    color: #eaf7ff;
+
     border-radius: 16px;
+    border-width: 1px;
+    border-color: rgba(180, 220, 255, 0.4);
 }
 
 .btn-create:hover {
-    background-color: #1e88e5;
+    background-color: rgba(160, 220, 255, 0.4);
 }
 
 .btn-create:active {
-    background-color: #1565c0;
+    background-color: rgba(200, 240, 255, 0.5);
 }

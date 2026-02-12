@@ -9,39 +9,47 @@ using static GameEvents;
 public class AchievementManager : MonoBehaviour
 {
     // Lista de logros (podría venir de una base de datos o ScriptableObject)
-    public List<Achievement> achievements = new
-    List<Achievement>();
+    public List<Achievement> achievements = new List<Achievement>();
+
+    public static event Action<Achievement> OnUnlockAchievement;
+
+    private void Start()
+    {
+        LoadOrInitializeAchievements();
+    }
 
 
-        private void Start()
+    private void LoadOrInitializeAchievements()
+    {
+        AchievementWrapper wrapper = SaveManager.LoadAchievements();
+
+        if (wrapper != null && wrapper.Achievements != null)
         {
-            // Inicializamos algunos logros de prueba
-            if (achievements.Count == 0)
+            Debug.Log("Cargando progreso de achievements desde archivo...");
+
+            // Sincronizar progreso con los del inspector
+            foreach (var saved in wrapper.Achievements)
             {
-                achievements.Add(new Achievement("KILL_5",   //Comprobar esta parte
-                "Principiante 5",GameEvents.AchievementEventType.EnemyKilled, "Derrota 5 enemigos", 5));
+                Achievement editorAch = achievements.Find(a => a.ID == saved.ID);
 
-                achievements.Add(new Achievement("KILL_5",   
-                    "Principiante 10", GameEvents.AchievementEventType.EnemyKilled, "Derrota 10 enemigos", 10));
-
-                achievements.Add(new Achievement("WALL_3",
-                    "Demoledor", GameEvents.AchievementEventType.WallDestroyed, "Rompe 3 muros", 3));
-
-                achievements.Add(new Achievement("LEVEL_2",
-                "Explorador", GameEvents.AchievementEventType.LevelCompleted, "Supera 2 niveles", 2));
-                
-                achievements.Add(new Achievement("FOOD_1",
-                "Comedor10", GameEvents.AchievementEventType.FoodConsumed, "Come 10 deliciosas comidas", 10));
-
-                achievements.Add(new Achievement("HEALTH_1",
-                 "Duro de Pelar 200", GameEvents.AchievementEventType.HealthRestored, "Cura 200 de vida comiendo deliciosas comidas", 200));
+                if (editorAch != null)
+                {
+                    editorAch.CurrentCount = saved.CurrentCount;
+                    editorAch.IsUnlocked = saved.IsUnlocked;
+                }
+            }
         }
+        else
+        {
+            Debug.Log("No existe archivo. Guardando achievements base del editor...");
+            SaveManager.SaveAchievements(achievements);
         }
+    }
 
 
 
-        // --- SUSCRIPCIÓN A EVENTOS (La parte clave) ---
-        private void OnEnable()
+    // --- SUSCRIPCIÓN A EVENTOS (La parte clave) ---
+    private void OnEnable()
         {
             // Nos "suscribimos" a la radio
             GameEvents.OnEnemyKilled += HandleGameEvent;
@@ -67,21 +75,29 @@ public class AchievementManager : MonoBehaviour
 
 
     // --- MANEJADORES DE EVENTOS ---
-            private void HandleGameEvent(AchievementEventType eventType,int amount)
+    private void HandleGameEvent(GameEvents.AchievementEventType eventType, int amount)
+    {
+        bool changed = false;
+
+        foreach (var ach in achievements)
+        {
+            if (ach.IsUnlocked) continue;
+            if (ach.EventType != eventType) continue;
+
+            ach.CurrentCount += amount;
+            changed = true;
+
+            if (ach.CurrentCount >= ach.TargetCount)
             {
-                foreach (var ach in achievements)
-                {
-                    if (ach.IsUnlocked) continue;
-                    if (ach.EventType != eventType) continue;
-
-                    ach.CurrentCount += amount;
-
-                    if (ach.CurrentCount >= ach.TargetCount)
-                    {
-                        UnlockAchievement(ach);
-                    }
-                }
+                UnlockAchievement(ach);
             }
+        }
+
+        if (changed)
+        {
+            SaveManager.SaveAchievements(achievements);
+        }
+    }
     /*private void CheckProgress(string achievementID)  En esta parte se comprueba el progreso de un logro concreto Creo q no hace falta
         {
             // Buscamos el logro por ID
@@ -107,7 +123,11 @@ public class AchievementManager : MonoBehaviour
             ach.IsUnlocked = true;
             Debug.Log($"<color=yellow>¡LOGRO DESBLOQUEADO:{ ach.Title}!</color>");
 
+
         // Aquí lanzarías un evento de UI para mostrar la medalla en pantalla
         // Ej: UIManager.ShowAchievementPopup(ach);
+
+        OnUnlockAchievement?.Invoke(ach);
+
     }
 }

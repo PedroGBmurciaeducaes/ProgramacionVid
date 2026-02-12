@@ -1,0 +1,40 @@
+.gameover-root {
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+    background-color: #111111;
+    padding: 40px;
+}
+
+.gameover-title {
+    font-size: 48px;
+    color: #ff3b3b;
+    unity-font-style: bold;
+    margin-bottom: 30px;
+}
+
+.stats-container {
+    width: 400px;
+    background-color: #1e1e1e;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.stats-container Label {
+    font-size: 18px;
+    color: white;
+    margin-bottom: 8px;
+}
+
+.menu-button {
+    margin-top: 30px;
+    font-size: 20px;
+    height: 45px;
+    background-color: #ff3b3b;
+    color: white;
+    border-radius: 8px;
+}
+
+.menu-button:hover {
+    background-color: #ff5a5a;
+}

@@ -1,9 +1,10 @@
+using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
-using System.Collections;
-using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
@@ -68,6 +69,9 @@ public class GameManager : MonoBehaviour
         m_FoodAmount = m_maxFoodAmount;
         m_ExpAmount = GameSesion.instance.fichaDePersonaje.experiencia;
 
+        SaveManager.SavePlayer(GameSesion.instance.fichaDePersonaje);
+        Debug.Log("Nombre del personaje:" + GameSesion.instance.fichaDePersonaje.nombre);
+
         if (m_PlayerNameLabel != null)
         {
             m_PlayerNameLabel.text = GameSesion.instance.fichaDePersonaje.nombre;
@@ -88,6 +92,10 @@ public class GameManager : MonoBehaviour
         BoardManager.Clean();
         BoardManager.Init();
         PlayerController.Spawn(BoardManager, new Vector2Int(1, 1));
+
+        SaveManager.SavePlayer(GameSesion.instance.fichaDePersonaje);
+        Debug.Log("Nombre del personaje:"+GameSesion.instance.fichaDePersonaje.nombre);
+
 
         m_CurrentLevel++;
     }
@@ -115,8 +123,11 @@ public class GameManager : MonoBehaviour
             if (m_FoodAmount <= 0)
             {
                 PlayerController.GameOver();
+                SceneManager.LoadScene("GameOver");
+                /*
                 m_GameOverPanel.style.visibility = Visibility.Visible;
                 m_GameOverMessage.text = "Game Over!\n\nSurvived " + m_CurrentLevel + " days";
+                */
             }
         }
     }
@@ -139,8 +150,14 @@ public class GameManager : MonoBehaviour
             if (m_FoodAmount <= 0)
             {
                 PlayerController.GameOver();
+                UnityEngine.SceneManagement.SceneManager.LoadScene("GameOver");
+
+
+                /*
                 m_GameOverPanel.style.visibility = Visibility.Visible;
                 m_GameOverMessage.text = "Game Over!\n\nSurvived " + m_CurrentLevel + " days";
+                
+                 */
             }
         }
     }

@@ -1,0 +1,73 @@
+.overlay {
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0,0,0,0.8);
+}
+
+.panel {
+    width: 520px;
+    padding: 25px;
+    background-color: #101c24;
+    border-radius: 14px;
+    border-width: 2px;
+    border-color: rgba(180,220,255,0.3);
+}
+
+.title {
+    font-size: 28px;
+    unity-font-style: bold;
+    color: #e6f6ff;
+    margin-bottom: 20px;
+    align-self: center;
+}
+
+.achievement-list {
+    height: 400px;
+    margin-bottom: 20px;
+}
+
+.achievement-item {
+    background-color: rgba(120,180,220,0.12);
+    border-radius: 10px;
+    padding: 12px;
+    margin-bottom: 12px;
+}
+
+.achievement-title {
+    font-size: 16px;
+    unity-font-style: bold;
+    color: #eaf7ff;
+}
+
+.achievement-desc {
+    font-size: 13px;
+    color: #b6d9ee;
+    margin-bottom: 6px;
+}
+
+.progress-label {
+    font-size: 12px;
+    color: #ffffff;
+    margin-bottom: 4px;
+}
+
+.progress-bar-background {
+    height: 8px;
+    background-color: rgba(255,255,255,0.15);
+    border-radius: 6px;
+}
+
+.progress-bar-fill {
+    height: 8px;
+    background-color: #6cd4ff;
+    border-radius: 6px;
+}
+
+.unlocked {
+    background-color: rgba(100,255,150,0.2);
+}
+
+.close-button {
+    height: 40px;
+}

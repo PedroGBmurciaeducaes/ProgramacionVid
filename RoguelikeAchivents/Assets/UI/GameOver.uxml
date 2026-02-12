@@ -1,0 +1,17 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/GameOverStyles.uss?fileID=7433441132597879392&amp;guid=ed02105d95aaefe46b4d4f078698bcdb&amp;type=3#GameOverStyles" />
+    <ui:VisualElement class="gameover-root">
+        <ui:Label text="GAME OVER" class="gameover-title" />
+        <ui:VisualElement class="stats-container">
+            <ui:Label name="turnosLabel" />
+            <ui:Label name="enemigosLabel" />
+            <ui:Label name="murosLabel" />
+            <ui:Label name="comidaLabel" />
+            <ui:Label name="nivelesLabel" />
+            <ui:Label name="cofresLabel" />
+            <ui:Label name="vidaLabel" />
+            <ui:Label name="experienciaLabel" />
+        </ui:VisualElement>
+        <ui:Button name="menuButton" text="Volver al menú" class="menu-button" />
+    </ui:VisualElement>
+</ui:UXML>

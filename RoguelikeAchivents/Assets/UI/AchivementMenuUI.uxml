@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/AchievementMenuStyles.uss?fileID=7433441132597879392&amp;guid=d8cde1d49d69b8a4bafd930da1f8e938&amp;type=3#AchievementMenuStyles" />
+    <ui:VisualElement class="overlay">
+        <ui:VisualElement class="panel">
+            <ui:Label text="LOGROS" class="title" />
+            <ui:ScrollView name="AchievementList" class="achievement-list" />
+            <ui:Button name="BtnClose" text="Cerrar" class="close-button" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

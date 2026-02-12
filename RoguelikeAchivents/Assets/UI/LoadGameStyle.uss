@@ -1,0 +1,93 @@
+/* ===== ROOT ===== */
+.root {
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ===== FONDO OSCURO ===== */
+.background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #0c1e2b;
+}
+
+/* ===== CONTENEDOR CENTRAL ===== */
+.menu-container {
+    width: 480px;
+    padding: 30px;
+    background-color: rgba(220, 240, 255, 0.08);
+
+    border-radius: 16px;
+    border-width: 2px;
+    border-color: rgba(180, 220, 255, 0.25);
+
+    align-items: center;
+}
+
+/* ===== TITULOS ===== */
+.title {
+    font-size: 30px;
+    unity-font-style: bold;
+    color: #e6f6ff;
+    margin-bottom: 6px;
+}
+
+.subtitle {
+    font-size: 14px;
+    color: #b6d9ee;
+    margin-bottom: 20px;
+}
+
+/* ===== LISTA ===== */
+.save-list {
+    width: 100%;
+    height: 280px;
+    margin-bottom: 20px;
+}
+
+/* ===== BOTONES DE SAVE (TARJETAS) ===== */
+.save-button {
+    height: 55px;
+    margin-bottom: 12px;
+
+    font-size: 16px;
+    unity-font-style: bold;
+
+    color: #eaf7ff;
+    background-color: rgba(120, 180, 220, 0.15);
+
+    border-radius: 10px;
+    border-width: 1px;
+    border-color: rgba(180, 220, 255, 0.4);
+}
+
+.save-button:hover {
+    background-color: rgba(160, 220, 255, 0.35);
+}
+
+.save-button:active {
+    background-color: rgba(200, 240, 255, 0.45);
+}
+
+/* ===== BOTÓN VOLVER ===== */
+.menu-button {
+    height: 44px;
+    width: 160px;
+
+    font-size: 16px;
+    unity-font-style: bold;
+
+    color: #eaf7ff;
+    background-color: rgba(200, 80, 80, 0.15);
+
+    border-radius: 10px;
+    border-width: 1px;
+    border-color: rgba(255, 140, 140, 0.4);
+}
+
+.menu-button:hover {
+    background-color: rgba(255, 120, 120, 0.35);
+}

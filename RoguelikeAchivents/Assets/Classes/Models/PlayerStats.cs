@@ -5,6 +5,7 @@ using UnityEngine;
 [Serializable]
 public class PlayerStats
 {
+    [field: SerializeField]
     public string nombre { get; set; }
     [field: SerializeField]
     public int fuerza { get; set; }
