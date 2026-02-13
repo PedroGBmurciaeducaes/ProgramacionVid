@@ -7,7 +7,7 @@ public class AchievementMenuUI : MonoBehaviour
     public UIDocument uiDocument;
 
     //  Referencia al manager en escena
-    public AchievementManager achievementManager;
+    private AchievementManager achievementManager;
 
     private VisualElement root;
     private ScrollView achievementList;
@@ -17,6 +17,8 @@ public class AchievementMenuUI : MonoBehaviour
     {
         root = uiDocument.rootVisualElement;
 
+
+        achievementManager = AchievementManager.Instance;
         achievementList = root.Q<ScrollView>("AchievementList");
         btnClose = root.Q<Button>("BtnClose");
 
@@ -40,6 +42,12 @@ public class AchievementMenuUI : MonoBehaviour
 
     void RefreshUI()
     {
+
+        Debug.Log("Root: " + root);
+        Debug.Log("AchievementList: " + achievementList);
+        Debug.Log("Manager: " + achievementManager);
+        Debug.Log("Achievements count: " + achievementManager?.achievements?.Count);
+
         achievementList.Clear();
 
         if (achievementManager == null)

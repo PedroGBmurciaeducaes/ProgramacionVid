@@ -13,12 +13,17 @@ public class LoadGameMenu : MonoBehaviour
 
     void OnEnable()
     {
+
+        if (uiDocument == null)
+            uiDocument = GetComponent<UIDocument>();
+
         root = uiDocument.rootVisualElement;
 
         saveList = root.Q<ScrollView>("SaveList");
         btnClose = root.Q<Button>("BtnClose");
 
         btnClose.clicked += Volver;
+
 
         RefrescarListaArchivos();
     }
