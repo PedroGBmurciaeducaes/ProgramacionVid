@@ -12,7 +12,8 @@ public class Enemy : CellObject
 
     private int m_CurrentHealth;
 
-  
+
+
     private void Awake()
     {
         GameManager.Instance.TurnManager.OnTick += TurnHappened;
@@ -31,6 +32,8 @@ public class Enemy : CellObject
 
     public override bool PlayerWantsToEnter(int damage)
     {
+        GameManager.Instance.ShowCombatText(GameManager.MessageType.PlayerHitEnemy, damage, GameManager.Instance.player.transform);
+
         m_CurrentHealth -= damage;    //?¿?¿?
 
         if (m_CurrentHealth <= 0)

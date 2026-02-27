@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public BoardManager BoardManager;
     public PlayerController PlayerController;
 
+    public GameObject player;
     public UIDocument UIDoc;
     private Label m_FoodLabel;
 
@@ -112,14 +113,13 @@ public class GameManager : MonoBehaviour
             int healed = Mathf.Min(amount, m_maxFoodAmount - m_FoodAmount);
             m_FoodAmount = Mathf.Min(m_FoodAmount + amount, m_maxFoodAmount);
             m_FoodLabel.text = "Food : " + m_FoodAmount;
-            SpawnFloatingMessage("+" + healed + "HP", Color.green);
+            ShowCombatText(MessageType.Heal, amount, player.transform);
         }
         else
         {
             m_FoodAmount += amount;
             m_FoodLabel.text = "Food : " + m_FoodAmount;
-            SpawnFloatingMessage(amount + "HP", Color.red);
-
+            ShowCombatText(MessageType.StarvationDamage, amount, player.transform);
             if (m_FoodAmount <= 0)
             {
                 PlayerController.GameOver();
@@ -139,14 +139,13 @@ public class GameManager : MonoBehaviour
 
         if (hitProb < golpeo)
         {
-            SpawnFloatingMessage("Dodged!", Color.yellow);
+            GameManager.Instance.ShowCombatText(MessageType.Dodge, amount, player.transform);
         }
         else
         {
             m_FoodAmount -= amount;
             m_FoodLabel.text = "Food : " + m_FoodAmount;
-            SpawnFloatingMessage("-" + amount + "HP", Color.red);
-
+            ShowCombatText(MessageType.EnemyHitPlayer, amount, player.transform);
             if (m_FoodAmount <= 0)
             {
                 PlayerController.GameOver();
@@ -165,50 +164,142 @@ public class GameManager : MonoBehaviour
     public void ChangeExp(int amount)
     {
         m_ExpAmount += amount;
-        Debug.Log("Experience Points: " + m_ExpAmount);
+        GameManager.Instance.ShowCombatText(MessageType.ExpGain, amount, player.transform);
     }
 
 
     // ======================================
     // Sistema de mensajes flotantes con cola
     // ======================================
-    private void SpawnFloatingMessage(string text, Color color)
+
+
+
+
+    public enum MessageType
     {
-        StartCoroutine(FloatingMessageCoroutine(text, color));
+        Heal,
+        EnemyHitPlayer,
+        PlayerHitEnemy,
+        StarvationDamage,
+        Dodge,
+        CriticalHit,
+        LevelUp,
+        ExpGain
     }
 
-    private IEnumerator FloatingMessageCoroutine(string text, Color color)
+
+
+    public void ShowCombatText(MessageType type, int amount, Transform target)
     {
-        // Limitar mensajes activos
+        string text = "";
+        Color color = Color.white;
+        float scale = 1f;
+
+        switch (type)
+        {
+            case MessageType.Heal:
+                text = "+" + amount +" Healed";
+                color = Color.green;
+                break;
+
+            case MessageType.EnemyHitPlayer:
+                text = "-" + amount + " DMG recived";
+                color = new Color(1f, 0.2f, 0.2f);
+                scale = 1.1f;
+                break;
+
+            case MessageType.PlayerHitEnemy:
+                text = amount.ToString()+" Dealed to enemy";
+                color = Color.cyan;
+                break;
+
+            case MessageType.StarvationDamage:
+                text = amount + "HP lost" ;
+                color = new Color(1f, 0.5f, 0.1f);
+                break;
+
+            case MessageType.Dodge:
+                text = "MISS";
+                color = Color.yellow;
+                scale = 1.2f;
+                break;
+
+            case MessageType.CriticalHit:
+                text = "CRIT " + amount;
+                color = Color.magenta;
+                scale = 1.5f;
+                break;
+
+            case MessageType.LevelUp:
+                text = "LEVEL UP!";
+                color = Color.green;
+                scale = 1.4f;
+                break;
+
+            case MessageType.ExpGain:
+                text = "+" + amount + " EXP";
+                color = Color.blue;
+                break;
+        }
+
+        FloatingTextManager.Instance.Spawn(
+            text,
+            color,
+            target,
+            scale
+        );
+    }
+
+
+    private IEnumerator FloatingMessageCoroutine(string text, Color color, MessageType type)
+    {
         if (activeMessages.Count >= maxMessagesOnScreen)
         {
             Destroy(activeMessages[0].gameObject);
             activeMessages.RemoveAt(0);
         }
 
-        // Crear instancia del TMP
         TextMeshProUGUI msg = Instantiate(notificacionPers, notificacionPers.transform.parent);
         msg.gameObject.SetActive(true);
         msg.text = text;
         msg.color = color;
 
-        // Offset inicial según cantidad de mensajes activos
-        float yOffset = activeMessages.Count * 0.3f;
+        float yOffset = activeMessages.Count * 25f;
         Vector3 startPos = notificacionPers.transform.localPosition + Vector3.up * yOffset;
         msg.transform.localPosition = startPos;
 
         activeMessages.Add(msg);
 
         float elapsed = 0f;
+        float duration = messageDuration;
+
+        Vector3 originalScale = Vector3.one;
+
+        // Efectos especiales según tipo
+        if (type == MessageType.CriticalHit)
+        {
+            originalScale = Vector3.one * 1.4f;
+            msg.transform.localScale = originalScale;
+            duration *= 1.2f;
+        }
+
+        if (type == MessageType.EnemyHitPlayer)
+        {
+            msg.fontStyle = FontStyles.Bold;
+        }
+
         Color startColor = color;
         Color endColor = new Color(color.r, color.g, color.b, 0f);
 
-        while (elapsed < messageDuration)
+        while (elapsed < duration)
         {
-            if (msg == null) yield break; // Sale si el objeto fue destruido
+            if (msg == null) yield break;
 
-            float t = elapsed / messageDuration;
-            msg.transform.localPosition = startPos + Vector3.up * floatHeight * t;
+            float t = elapsed / duration;
+
+            float verticalSpeed = (type == MessageType.EnemyHitPlayer) ? floatHeight * 1.5f : floatHeight;
+
+            msg.transform.localPosition = startPos + Vector3.up * verticalSpeed * t;
             msg.color = Color.Lerp(startColor, endColor, t);
 
             elapsed += Time.deltaTime;

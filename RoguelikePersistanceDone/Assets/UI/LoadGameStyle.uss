@@ -48,28 +48,71 @@
     margin-bottom: 20px;
 }
 
-/* ===== BOTONES DE SAVE (TARJETAS) ===== */
-.save-button {
+/* ===== CONTENEDOR DE CADA SAVE ===== */
+.save-container {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
     height: 55px;
     margin-bottom: 12px;
+    padding-left: 12px;
+    padding-right: 6px;
+
+    background-color: rgba(120, 180, 220, 0.12);
+
+    border-radius: 10px;
+    border-width: 1px;
+    border-color: rgba(180, 220, 255, 0.35);
+}
+
+.save-container:hover {
+    background-color: rgba(160, 220, 255, 0.22);
+}
+
+/* ===== BOTÓN CARGAR ===== */
+.save-button {
+    flex-grow: 1;
+    height: 100%;
 
     font-size: 16px;
     unity-font-style: bold;
 
     color: #eaf7ff;
-    background-color: rgba(120, 180, 220, 0.15);
+    background-color: transparent;
 
-    border-radius: 10px;
-    border-width: 1px;
-    border-color: rgba(180, 220, 255, 0.4);
-}
-
-.save-button:hover {
-    background-color: rgba(160, 220, 255, 0.35);
+    border-width: 0;
+    unity-text-align: middle-left;
 }
 
 .save-button:active {
-    background-color: rgba(200, 240, 255, 0.45);
+    color: #ffffff;
+}
+
+/* ===== BOTÓN ELIMINAR ===== */
+.delete-button {
+    width: 36px;
+    height: 36px;
+
+    font-size: 14px;
+    unity-font-style: bold;
+
+    color: #ffbaba;
+    background-color: rgba(200, 60, 60, 0.15);
+
+    border-radius: 8px;
+    border-width: 1px;
+    border-color: rgba(255, 120, 120, 0.4);
+
+    unity-text-align: middle-center;
+}
+
+.delete-button:hover {
+    background-color: rgba(255, 80, 80, 0.35);
+}
+
+.delete-button:active {
+    background-color: rgba(255, 120, 120, 0.5);
 }
 
 /* ===== BOTÓN VOLVER ===== */
