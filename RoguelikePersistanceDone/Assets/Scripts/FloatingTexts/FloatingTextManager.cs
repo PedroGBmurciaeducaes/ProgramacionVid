@@ -5,48 +5,96 @@ public class FloatingTextManager : MonoBehaviour
 {
     public static FloatingTextManager Instance;
 
-    [Header("Prefabs y Canvas")]
-    public GameObject floatingTextPrefab; // Tu prefab de TMP
-    public Canvas canvas;                  // Canvas donde se instancian los textos
+    [Header("Referencias")]
+    public GameObject floatingTextPrefab;
+    public Canvas canvas;
 
-    [Header("Separación y movimiento")]
-    public float verticalOffset = 1.5f;      // altura inicial sobre el target (en unidades del mundo)
-    public float maxRandomOffsetX = 50f;     // desviación horizontal en píxeles
-    public float moveSpeed = 40f;            // velocidad vertical de subida (pixeles/seg)
+    [Header("Offsets base por tipo (mundo)")]
+    public Vector3 foodOffset = new Vector3(0.8f, 0.5f, 0);
+    public Vector3 enemyHitOffset = new Vector3(0f, 1.8f, 0);
+    public Vector3 dodgeOffset = new Vector3(0f, 2.4f, 0);
+    public Vector3 playerHitEnemyOffset = new Vector3(0f, 1.6f, 0);
+    public Vector3 critOffset = new Vector3(0f, 2.6f, 0);
+    public Vector3 chests = new Vector3(0f, 2.6f, 0); // Ya que no tenemos criticos, utilizamos el mismo offset para los cofres
+    public Vector3 expOffset = new Vector3(0f, 3f, 0);
+    public Vector3 healOffset = new Vector3(0f, 1.5f, 0);
+    public Vector3 levelUpOffset = new Vector3(0f, 3.5f, 0);
+
+    [Header("Separación vertical en pantalla")]
+    public float stackSpacing = 25f;
+
+    // Clave = targetID + tipo
+    private Dictionary<string, int> activeStacks = new Dictionary<string, int>();
 
     void Awake()
     {
         Instance = this;
     }
 
-    /// <summary>
-    /// Spawnea un número flotante sobre un target.
-    /// </summary>
-    public void Spawn(string text, Color color, Transform target, float scale = 1f)
+    public void Spawn(string text, Color color, Transform target, float scale, MessageType.type type)
     {
         if (target == null) return;
 
-        // Posición inicial en pantalla
-        Vector3 screenPos = Camera.main.WorldToScreenPoint(target.position + Vector3.up * verticalOffset);
+        //  Obtener offset base por tipo
+        Vector3 baseOffset = GetOffsetByType(type);
 
-        // Offset horizontal aleatorio para separar mensajes
-        float offsetX = Random.Range(30, maxRandomOffsetX);
-        float offsetY = Random.Range(0f, 10f); // 0 a 10 píxeles
-        Vector3 finalPos = screenPos + new Vector3(offsetX, offsetY, 0);
+        //  Crear clave única por zona
+        string stackKey = target.GetInstanceID() + "_" + type;
 
-        // Instanciar prefab como hijo del canvas
+        int stackIndex = 0;
+
+        if (activeStacks.ContainsKey(stackKey))
+        {
+            stackIndex = activeStacks[stackKey];
+            activeStacks[stackKey]++;
+        }
+        else
+        {
+            activeStacks.Add(stackKey, 1);
+        }
+
+        //  Posición base en pantalla
+        Vector3 worldPos = target.position + baseOffset;
+        Vector3 screenPos = Camera.main.WorldToScreenPoint(worldPos);
+
+        //  Aplicar desplazamiento vertical solo si hay más de uno
+        screenPos.y += stackSpacing * stackIndex;
+
         GameObject obj = Instantiate(floatingTextPrefab, canvas.transform);
-        obj.transform.position = finalPos;
+        obj.transform.position = screenPos;
 
-        // Inicializar texto
         FloatingText ft = obj.GetComponent<FloatingText>();
-        ft.moveSpeed = moveSpeed; // le pasamos la velocidad
         ft.Init(text, color, scale);
 
-        // Callback al destruir
+        //  Cuando desaparece, reducimos pila
         ft.OnDestroyed = () =>
         {
-            // Aquí puedes hacer limpieza o actualizar contadores si quieres
+            if (activeStacks.ContainsKey(stackKey))
+            {
+                activeStacks[stackKey]--;
+
+                if (activeStacks[stackKey] <= 0)
+                    activeStacks.Remove(stackKey);
+            }
         };
+    }
+
+    private Vector3 GetOffsetByType(MessageType.type type)
+    {
+        switch (type)
+        {
+            case MessageType.type.Heal: return healOffset;
+            case MessageType.type.EnemyHitPlayer: return enemyHitOffset;
+            case MessageType.type.PlayerHitEnemy: return playerHitEnemyOffset;
+            case MessageType.type.StarvationDamage: return foodOffset;
+            case MessageType.type.Dodge: return dodgeOffset;
+            case MessageType.type.CriticalHit: return critOffset;
+            case MessageType.type.ChestOpened: return chests;
+            case MessageType.type.NeedKey: return chests;
+            case MessageType.type.LevelUp: return levelUpOffset;
+            case MessageType.type.ExpGain: return expOffset;
+            case MessageType.type.llaveObtenida: return chests;
+            default: return Vector3.up * 2f;
+        }
     }
 }

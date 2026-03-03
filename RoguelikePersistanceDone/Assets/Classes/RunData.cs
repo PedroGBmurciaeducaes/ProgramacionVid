@@ -3,13 +3,13 @@ using static GameEvents;
 
 public class RunData : MonoBehaviour
 {
-    public int turnosJugados;
-    public int murosDestruidos;
-    public int comidaConsumida;
-    public int enemigosEliminados;
-    public int nivelesCompletados;
-    public int cofresAbiertos;
-    public int vidaRecuperada;
+    public int turnosJugados=0;
+    public int murosDestruidos = 0;
+    public int comidaConsumida = 0;
+    public int enemigosEliminados = 0;
+    public int nivelesCompletados = 0;
+    public int cofresAbiertos = 0;
+    public int vidaRecuperada = 0;
 
 
 
@@ -21,6 +21,7 @@ public class RunData : MonoBehaviour
         GameEvents.OnFoodConsumed += OnFoodConsumed;
         GameEvents.OnHealthRestored += OnHealthRestored;
         GameEvents.OnChestOpened += OnChestOpened;
+        GameEvents. OnTurnHappened+= AddTurn;
     }
 
     private void OnDisable()
@@ -31,6 +32,8 @@ public class RunData : MonoBehaviour
         GameEvents.OnFoodConsumed -= OnFoodConsumed;
         GameEvents.OnHealthRestored -= OnHealthRestored;
         GameEvents.OnChestOpened -= OnChestOpened;
+        GameEvents.OnTurnHappened -= AddTurn;
+
     }
 
     private void OnEnemyKilled(AchievementEventType type, int amount)
@@ -64,7 +67,7 @@ public class RunData : MonoBehaviour
     }
 
     // Este lo puedes llamar desde TurnManager
-    public void AddTurn()
+    public void AddTurn(AchievementEventType type, int amount)
     {
         turnosJugados++;
     }

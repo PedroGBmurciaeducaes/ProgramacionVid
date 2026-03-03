@@ -102,4 +102,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 5
   Damage: 1
-  peso: 25
+  peso: 40
+  MinExperience: 3
+  MaxExperience: 6

@@ -4,14 +4,19 @@ using UnityEngine;
 
 public class FloatingText : MonoBehaviour
 {
-    public Action OnDestroyed; // <- Esto permite asignar un callback desde el manager
+    public Action OnDestroyed;
 
-    public float duration = 1f;
-    public float moveSpeed = 40f;
+    [Header("Timing")]
+    public float duration = 3.5f;     // ahora dura más
+    public float fadeStartPercent = 0.7f; // empieza a desaparecer al 70%
+
+    [Header("Movimiento")]
+    public float moveSpeed = 25f;     // más lento = más legible
 
     private TextMeshProUGUI text;
     private Color startColor;
     private float timer;
+    
 
     void Awake()
     {
@@ -23,23 +28,31 @@ public class FloatingText : MonoBehaviour
         text.text = message;
         text.color = color;
         startColor = color;
+
         transform.localScale = Vector3.one * scale;
     }
 
     void Update()
     {
         timer += Time.deltaTime;
-        float t = timer / duration;
 
-        // Movimiento hacia arriba constante
+        float normalizedTime = timer / duration;
+
+        // Movimiento más suave
         transform.Translate(Vector3.up * moveSpeed * Time.deltaTime);
 
-        // Fade out
-        text.color = Color.Lerp(startColor, new Color(startColor.r, startColor.g, startColor.b, 0f), t);
+        // Fade solo al final
+        if (normalizedTime >= fadeStartPercent)
+        {
+            float fadeT = (normalizedTime - fadeStartPercent) / (1f - fadeStartPercent);
+            text.color = Color.Lerp(startColor,
+                new Color(startColor.r, startColor.g, startColor.b, 0f),
+                fadeT);
+        }
 
         if (timer >= duration)
         {
-            OnDestroyed?.Invoke(); // <- Llama al callback si existe
+            OnDestroyed?.Invoke();
             Destroy(gameObject);
         }
     }

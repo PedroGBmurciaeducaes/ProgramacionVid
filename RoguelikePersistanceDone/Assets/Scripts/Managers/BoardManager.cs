@@ -308,7 +308,7 @@ public class BoardManager : MonoBehaviour
 
 
 
-    void AddObject(CellObject obj, Vector2Int coord)
+    public void AddObject(CellObject obj, Vector2Int coord)
     {
         CellData data = m_BoardData[coord.x, coord.y];
         obj.transform.position = CellToWorld(coord);
@@ -327,7 +327,7 @@ public class BoardManager : MonoBehaviour
 
         for (int y = 0; y < Height; ++y)
         {
-            for (int x = 0; x < Width; ++x)
+            for (int x = 0; x < Width; ++x) 
             {
                 var cellData = m_BoardData[x, y];
 

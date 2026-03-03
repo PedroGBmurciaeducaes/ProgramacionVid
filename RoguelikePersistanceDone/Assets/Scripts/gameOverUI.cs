@@ -13,7 +13,7 @@ public class gameOverUI : MonoBehaviour
 
         // Labels
         root.Q<Label>("turnosLabel").text =
-            $"Turnos jugados: {GameSesion.instance.runData.turnosJugados}";
+            $"Pasos andados (turnos): {GameSesion.instance.runData.turnosJugados}";
 
         root.Q<Label>("enemigosLabel").text =
             $"Enemigos eliminados: {GameSesion.instance.runData.enemigosEliminados}";

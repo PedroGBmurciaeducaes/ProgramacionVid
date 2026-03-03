@@ -1,3 +1,4 @@
+using System;
 using Unity.Mathematics;
 using UnityEditor;
 using UnityEngine;
@@ -8,7 +9,8 @@ public class Enemy : CellObject
     public int Health = 3;
    public int Damage = 3;
     public int peso = 1;
-
+    public int MinExperience = 3;
+    public int MaxExperience = 6; 
 
     private int m_CurrentHealth;
 
@@ -32,20 +34,27 @@ public class Enemy : CellObject
 
     public override bool PlayerWantsToEnter(int damage)
     {
-        GameManager.Instance.ShowCombatText(GameManager.MessageType.PlayerHitEnemy, damage, GameManager.Instance.player.transform);
+        GameManager.Instance.ShowCombatText(MessageType.type.PlayerHitEnemy, damage, GameManager.Instance.player.transform);
 
         m_CurrentHealth -= damage;    //?¿?¿?
 
         if (m_CurrentHealth <= 0)
         {
-            GameEvents.TriggerEnemyKilled();
-            Destroy(gameObject);
+            die();
         }
 
         return false;
     }
 
-    bool MoveTo(Vector2Int coord)
+   public virtual void die()   //Añadimos metodo para poder sobreescribirlo en otros tipos de enemigos y asi hacer que al morir hagan cosas distintas (como soltar objetos, etc)
+    {
+        GameEvents.TriggerEnemyKilled();
+        GameManager.Instance.ChangeExp(UnityEngine.Random.Range(MinExperience, MaxExperience + 1)); //Al morir el enemigo, el jugador gana una cantidad aleatoria de experiencia entre MinExperience y MaxExperience
+        Destroy(gameObject);
+    }
+
+
+    protected bool MoveTo(Vector2Int coord) //Modificamos tmb este metodo para poder modificar el comportamiento de movimientos de otros enemigos
     {
         var board = GameManager.Instance.BoardManager;
         var targetCell = board.GetCellData(coord);
@@ -72,7 +81,11 @@ public class Enemy : CellObject
 
     void TurnHappened()
     {
-        //We added a public property that return the player current cell!
+        DoTurn();
+    }
+
+    protected virtual void DoTurn()  //Para poder sobreescribir correctamente el comportamiento de otros tipos de enemigos sin sobreescribir TurnHappened
+    {                                                //Creamos DoTurn   
         var playerCell = GameManager.Instance.PlayerController.getCell();
 
         int xDist = playerCell.x - m_Cell.x;
@@ -84,7 +97,6 @@ public class Enemy : CellObject
         if ((xDist == 0 && absYDist == 1)
             || (yDist == 0 && absXDist == 1))
         {
-            //we are adjacent to the player, attack!
             GameManager.Instance.DecreaseFood(Damage);
         }
         else
@@ -92,18 +104,12 @@ public class Enemy : CellObject
             if (absXDist > absYDist)
             {
                 if (!TryMoveInX(xDist))
-                {
-                    //if our move was not successful (so no move and not attack)
-                    //we try to move along Y
                     TryMoveInY(yDist);
-                }
             }
             else
             {
                 if (!TryMoveInY(yDist))
-                {
                     TryMoveInX(xDist);
-                }
             }
         }
     }

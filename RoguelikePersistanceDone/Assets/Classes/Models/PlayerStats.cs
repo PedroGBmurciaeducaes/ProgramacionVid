@@ -24,6 +24,10 @@ public class PlayerStats
     [field: SerializeField]
     public int experiencia { get; set; }
 
+    [field: SerializeField]
+    public int llaves { get; set; }
+
+
     public int saludMaxima => resistencia * 10 + fuerza / 2;
     public int daño => fuerza / 2;
 
@@ -51,6 +55,7 @@ public class PlayerStats
         murosDestruidos = 0;
         enemigosDerrotados = 0;
         nivelesCompletados = 0;
+        llaves = 0;
     }
 
     public PlayerStats(string nombre):this()
@@ -59,5 +64,27 @@ public class PlayerStats
         
     }
 
+
+    //Mover a GameManager?
+    public void AddKey(int amount = 1)
+    {
+        llaves += amount;
+        GameManager.Instance.UpdateKeys(llaves);
+    }
+
+    public bool HasKey()
+    {
+        return llaves > 0;
+    }
+
+    public bool TryUseKey()
+    {
+        if (llaves <= 0)
+            return false;
+
+        llaves--;
+        GameManager.Instance.UpdateKeys(llaves);
+        return true;
+    }
 
 }

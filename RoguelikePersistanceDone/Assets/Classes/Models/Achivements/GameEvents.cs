@@ -12,6 +12,7 @@ public static class GameEvents
         FoodConsumed,
         HealthRestored,
         ChestsOpened,
+        TurnHappened
     }
 
 
@@ -21,6 +22,8 @@ public static class GameEvents
     public static event Action<AchievementEventType, int> OnLevelCompleted;
     public static event Action<AchievementEventType, int> OnHealthRestored;
     public static event Action<AchievementEventType, int> OnChestOpened;
+    public static event Action<AchievementEventType, int> OnTurnHappened;
+
 
 
 
@@ -45,7 +48,8 @@ public static class GameEvents
         public static void TriggerChestOpened() =>
         OnChestOpened?.Invoke(AchievementEventType.ChestsOpened, 1);
 
-
+        public static void TriggerTunrHappened() =>
+         OnTurnHappened?.Invoke(AchievementEventType.TurnHappened, 1);
 
 
 }

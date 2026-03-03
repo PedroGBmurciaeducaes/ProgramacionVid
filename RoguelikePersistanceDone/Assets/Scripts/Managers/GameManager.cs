@@ -25,7 +25,10 @@ public class GameManager : MonoBehaviour
 
     private VisualElement m_GameOverPanel;
     private Label m_GameOverMessage;
-    private Label m_PlayerNameLabel; 
+    private Label m_PlayerNameLabel;
+    private Label keyLabel;
+    private Label m_ExpLabel;
+
 
 
 
@@ -58,13 +61,28 @@ public class GameManager : MonoBehaviour
         m_GameOverPanel = UIDoc.rootVisualElement.Q<VisualElement>("GameOverPanel");
         m_GameOverMessage = m_GameOverPanel.Q<Label>("GameOverMessage");
         m_PlayerNameLabel = UIDoc.rootVisualElement.Q<Label>("PlayerNameLabel");
+        keyLabel = UIDoc.rootVisualElement.Q<Label>("KeyLabel");
+        m_ExpLabel = UIDoc.rootVisualElement.Q<Label>("ExpLabel");
 
         StartNewGame();
     }
+    public void UpdateKeys(int amount)
+    {
+        keyLabel.text = "x" + amount.ToString();
+    }
+
+    public void UpdateExp(int amount)
+    {
+        m_ExpLabel.text = "EXP : " + amount.ToString();
+    }
+
 
     public void StartNewGame()
     {
         m_GameOverPanel.style.visibility = Visibility.Hidden;
+
+        UpdateKeys(GameSesion.instance.fichaDePersonaje.llaves);
+        UpdateExp(GameSesion.instance.fichaDePersonaje.experiencia);
 
         m_maxFoodAmount = GameSesion.instance.fichaDePersonaje.saludMaxima;
         m_FoodAmount = m_maxFoodAmount;
@@ -113,13 +131,13 @@ public class GameManager : MonoBehaviour
             int healed = Mathf.Min(amount, m_maxFoodAmount - m_FoodAmount);
             m_FoodAmount = Mathf.Min(m_FoodAmount + amount, m_maxFoodAmount);
             m_FoodLabel.text = "Food : " + m_FoodAmount;
-            ShowCombatText(MessageType.Heal, amount, player.transform);
+            ShowCombatText(MessageType.type.Heal, amount, player.transform);
         }
         else
         {
             m_FoodAmount += amount;
             m_FoodLabel.text = "Food : " + m_FoodAmount;
-            ShowCombatText(MessageType.StarvationDamage, amount, player.transform);
+            ShowCombatText(MessageType.type.StarvationDamage, amount, player.transform);
             if (m_FoodAmount <= 0)
             {
                 PlayerController.GameOver();
@@ -132,20 +150,20 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void DecreaseFood(int amount)
+    public void DecreaseFood(int amount)  // Para ataques enemigos, con posibilidad de esquivar
     {
         int hitProb = 100 - GameSesion.instance.fichaDePersonaje.esquiva;
         int golpeo = UnityEngine.Random.Range(0, 100);
 
         if (hitProb < golpeo)
         {
-            GameManager.Instance.ShowCombatText(MessageType.Dodge, amount, player.transform);
+            GameManager.Instance.ShowCombatText(MessageType.type.Dodge, amount, player.transform);
         }
         else
         {
             m_FoodAmount -= amount;
             m_FoodLabel.text = "Food : " + m_FoodAmount;
-            ShowCombatText(MessageType.EnemyHitPlayer, amount, player.transform);
+            ShowCombatText(MessageType.type.EnemyHitPlayer, amount, player.transform);
             if (m_FoodAmount <= 0)
             {
                 PlayerController.GameOver();
@@ -163,8 +181,11 @@ public class GameManager : MonoBehaviour
 
     public void ChangeExp(int amount)
     {
-        m_ExpAmount += amount;
-        GameManager.Instance.ShowCombatText(MessageType.ExpGain, amount, player.transform);
+        GameSesion.instance.fichaDePersonaje.experiencia += amount;
+
+        UpdateExp(GameSesion.instance.fichaDePersonaje.experiencia);    
+
+        GameManager.Instance.ShowCombatText(MessageType.type.ExpGain, amount, player.transform);
     }
 
 
@@ -175,21 +196,11 @@ public class GameManager : MonoBehaviour
 
 
 
-    public enum MessageType
-    {
-        Heal,
-        EnemyHitPlayer,
-        PlayerHitEnemy,
-        StarvationDamage,
-        Dodge,
-        CriticalHit,
-        LevelUp,
-        ExpGain
-    }
 
 
 
-    public void ShowCombatText(MessageType type, int amount, Transform target)
+
+    public void ShowCombatText(MessageType.type type, int amount, Transform target)
     {
         string text = "";
         Color color = Color.white;
@@ -197,48 +208,62 @@ public class GameManager : MonoBehaviour
 
         switch (type)
         {
-            case MessageType.Heal:
+            case MessageType.type.Heal:
                 text = "+" + amount +" Healed";
                 color = Color.green;
                 break;
 
-            case MessageType.EnemyHitPlayer:
+            case MessageType.type.EnemyHitPlayer:
                 text = "-" + amount + " DMG recived";
                 color = new Color(1f, 0.2f, 0.2f);
                 scale = 1.1f;
                 break;
 
-            case MessageType.PlayerHitEnemy:
+            case MessageType.type.PlayerHitEnemy:
                 text = amount.ToString()+" Dealed to enemy";
                 color = Color.cyan;
                 break;
 
-            case MessageType.StarvationDamage:
+            case MessageType.type.StarvationDamage:
                 text = amount + "HP lost" ;
                 color = new Color(1f, 0.5f, 0.1f);
                 break;
 
-            case MessageType.Dodge:
-                text = "MISS";
+            case MessageType.type.Dodge:
+                text = "DODGE";
                 color = Color.yellow;
                 scale = 1.2f;
                 break;
 
-            case MessageType.CriticalHit:
+            case MessageType.type.CriticalHit:
                 text = "CRIT " + amount;
                 color = Color.magenta;
                 scale = 1.5f;
                 break;
 
-            case MessageType.LevelUp:
+            case MessageType.type.LevelUp:
                 text = "LEVEL UP!";
                 color = Color.green;
                 scale = 1.4f;
                 break;
 
-            case MessageType.ExpGain:
+            case MessageType.type.ExpGain:
                 text = "+" + amount + " EXP";
                 color = Color.blue;
+                break;
+
+            case MessageType.type.ChestOpened:
+                text = "Chest Unlocked";
+                color = Color.magenta;
+                break;
+
+            case MessageType.type.NeedKey:
+                text = "Need a Key to open this";
+                color = Color.magenta;
+                break;
+            case MessageType.type.llaveObtenida:
+                text = "Key Obtained";
+                color = Color.magenta;
                 break;
         }
 
@@ -246,12 +271,13 @@ public class GameManager : MonoBehaviour
             text,
             color,
             target,
-            scale
+            scale,
+            type
         );
     }
 
 
-    private IEnumerator FloatingMessageCoroutine(string text, Color color, MessageType type)
+    private IEnumerator FloatingMessageCoroutine(string text, Color color, MessageType.type type)
     {
         if (activeMessages.Count >= maxMessagesOnScreen)
         {
@@ -276,14 +302,14 @@ public class GameManager : MonoBehaviour
         Vector3 originalScale = Vector3.one;
 
         // Efectos especiales según tipo
-        if (type == MessageType.CriticalHit)
+        if (type == MessageType.type.CriticalHit)
         {
             originalScale = Vector3.one * 1.4f;
             msg.transform.localScale = originalScale;
             duration *= 1.2f;
         }
 
-        if (type == MessageType.EnemyHitPlayer)
+        if (type == MessageType.type.EnemyHitPlayer)
         {
             msg.fontStyle = FontStyles.Bold;
         }
@@ -297,7 +323,7 @@ public class GameManager : MonoBehaviour
 
             float t = elapsed / duration;
 
-            float verticalSpeed = (type == MessageType.EnemyHitPlayer) ? floatHeight * 1.5f : floatHeight;
+            float verticalSpeed = (type == MessageType.type.EnemyHitPlayer) ? floatHeight * 1.5f : floatHeight;
 
             msg.transform.localPosition = startPos + Vector3.up * verticalSpeed * t;
             msg.color = Color.Lerp(startColor, endColor, t);

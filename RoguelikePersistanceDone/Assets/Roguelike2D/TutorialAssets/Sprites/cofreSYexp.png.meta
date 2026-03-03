@@ -1,0 +1,333 @@
+fileFormatVersion: 2
+guid: 29a2ac74ffdcea2489f84c50de7d3e1e
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2157161289150566338
+    second: cofreSYexp_0
+  - first:
+      213: -3266470155327658413
+    second: cofreSYexp_1
+  - first:
+      213: -36343539035840315
+    second: cofreSYexp_2
+  - first:
+      213: -8751695845673533055
+    second: cofreSYexp_3
+  - first:
+      213: 5261208744652248020
+    second: cofreSYexp_4
+  - first:
+      213: -2540368377538059773
+    second: cofreSYexp_5
+  - first:
+      213: 5458102551613060950
+    second: cofreSYexp_6
+  - first:
+      213: 3871018963590150488
+    second: cofreSYexp_7
+  - first:
+      213: 6404124422873888664
+    second: cofreSYexp_8
+  - first:
+      213: -8136667336017249537
+    second: cofreSYexp_9
+  - first:
+      213: -371531062560103331
+    second: cofreSYexp_10
+  - first:
+      213: 5423076370628294079
+    second: cofreSYexp_11
+  - first:
+      213: -8203568464065143590
+    second: cofreSYexp_12
+  - first:
+      213: 8548708570485627192
+    second: cofreSYexp_13
+  - first:
+      213: 3110539140985078028
+    second: cofreSYexp_14
+  - first:
+      213: 6969321686416555150
+    second: cofreSYexp_15
+  - first:
+      213: -4067826626932211986
+    second: cofreSYexp_16
+  - first:
+      213: 6447860068295214620
+    second: cofreSYexp_17
+  - first:
+      213: -3868828094044169858
+    second: cofreSYexp_18
+  - first:
+      213: -407110190534048758
+    second: cofreSYexp_19
+  - first:
+      213: -1195509599919813640
+    second: cofreSYexp_20
+  - first:
+      213: -2069767841415130210
+    second: cofreSYexp_21
+  - first:
+      213: 3577876534454297024
+    second: cofreSYexp_22
+  - first:
+      213: -7983132697497887602
+    second: cofreSYexp_23
+  - first:
+      213: 3248998087178587510
+    second: cofreSYexp_24
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: cofreSYexp_22
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c1aa5e60cb27a130800000000000000
+      internalID: 3577876534454297024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cofreSYexp_23
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8c15daab17363190800000000000000
+      internalID: -7983132697497887602
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cofreSYexp_24
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 67d043edb82c61d20800000000000000
+      internalID: 3248998087178587510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cofreSYexp_25
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 121db8967ab0b9943a958b983450ffab
+      internalID: 1045147886
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cofreSYexp_30
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 046ebb12c5200864b8a4216922acd56f
+      internalID: -1519524839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 82f275422cc110144a4681dab777808f
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      cofreSYexp_0: -2157161289150566338
+      cofreSYexp_1: -3266470155327658413
+      cofreSYexp_10: -371531062560103331
+      cofreSYexp_11: 5423076370628294079
+      cofreSYexp_12: -8203568464065143590
+      cofreSYexp_13: 8548708570485627192
+      cofreSYexp_14: 3110539140985078028
+      cofreSYexp_15: 6969321686416555150
+      cofreSYexp_16: -4067826626932211986
+      cofreSYexp_17: 6447860068295214620
+      cofreSYexp_18: -3868828094044169858
+      cofreSYexp_19: -407110190534048758
+      cofreSYexp_2: -36343539035840315
+      cofreSYexp_20: -1195509599919813640
+      cofreSYexp_21: -2069767841415130210
+      cofreSYexp_22: 3577876534454297024
+      cofreSYexp_23: -7983132697497887602
+      cofreSYexp_24: 3248998087178587510
+      cofreSYexp_25: 1045147886
+      cofreSYexp_26: 1160027658
+      cofreSYexp_27: 535751780
+      cofreSYexp_28: 1990931520
+      cofreSYexp_29: 512473071
+      cofreSYexp_3: -8751695845673533055
+      cofreSYexp_30: -1519524839
+      cofreSYexp_4: 5261208744652248020
+      cofreSYexp_5: -2540368377538059773
+      cofreSYexp_6: 5458102551613060950
+      cofreSYexp_7: 3871018963590150488
+      cofreSYexp_8: 6404124422873888664
+      cofreSYexp_9: -8136667336017249537
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

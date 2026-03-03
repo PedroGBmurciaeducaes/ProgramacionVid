@@ -186,16 +186,18 @@ MonoBehaviour:
   EnemyPrefab:
   - {fileID: 1836965239144534283, guid: 306cde10d2d86d64ba56d01ee5a67323, type: 3}
   - {fileID: 1836965239144534283, guid: 8da2813d55498cc448d650d9541498f7, type: 3}
+  - {fileID: 4259353200486373121, guid: db5b3d4688ab95b4fa1b25a11ae15e85, type: 3}
   ExitCellPrefab: {fileID: 626523643920220533, guid: 8e518de5f5254fd4e859300126e545bf, type: 3}
   ChestPrefab:
   - {fileID: 3932192521640621002, guid: 6e273fc8d48ef564b8344cd62bed0577, type: 3}
+  - {fileID: 2753514852633208207, guid: 6bfe44e3d4376a146bd831a417a09403, type: 3}
   EXPprefab:
   - {fileID: 4454166801840968219, guid: 6526bcfcfb04c784984ae1ba5f1dc4fb, type: 3}
   - {fileID: 4454166801840968219, guid: 541c903283fb66f48b238c0c97617bc3, type: 3}
   - {fileID: 4454166801840968219, guid: 59b781d027a666144937a227f3f00a73, type: 3}
   m_EmptyCellsList: []
-  Width: 14
-  Height: 14
+  Width: 10
+  Height: 25
   GroundTiles:
   - {fileID: 11400000, guid: 66e7339ec9a80134fa8aeee85f904260, type: 2}
   - {fileID: 11400000, guid: a87938f1370d73646a82c8761980546e, type: 2}
@@ -236,6 +238,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floatingTextPrefab: {fileID: 5697943971483684248, guid: 07e19de1086f25743b582585343b1254, type: 3}
   canvas: {fileID: 1014810348}
+  foodOffset: {x: 0.8, y: 0.5, z: 0}
+  enemyHitOffset: {x: 0, y: 1.8, z: 0}
+  dodgeOffset: {x: 0, y: 2.4, z: 0}
+  playerHitEnemyOffset: {x: 0, y: 1.6, z: 0}
+  critOffset: {x: 0, y: 2.6, z: 0}
+  chests: {x: 0, y: 2.6, z: 0}
+  expOffset: {x: 0, y: 3, z: 0}
+  healOffset: {x: 0, y: 1.5, z: 0}
+  levelUpOffset: {x: 0, y: 3.5, z: 0}
+  stackSpacing: 25
 --- !u!4 &397023181
 Transform:
   m_ObjectHideFlags: 0

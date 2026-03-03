@@ -316,6 +316,7 @@ MonoBehaviour:
     <inteligencia>k__BackingField: 1
     <puntosDisponibles>k__BackingField: 0
     <experiencia>k__BackingField: 0
+    <llaves>k__BackingField: 0
   runData: {fileID: 0}
   logros: []
 --- !u!4 &384534186
